@@ -1,18 +1,10 @@
 import React, { useState, useEffect } from 'react'
 import { createContext } from 'react'
 import {
-    createUserWithEmailAndPassword,
-    getAuth,
-    GoogleAuthProvider,
-    onAuthStateChanged,
-    sendEmailVerification,
-    sendPasswordResetEmail,
-    signInWithEmailAndPassword,
-    signInWithPopup,
-    signOut,
-    updateProfile,
+    createUserWithEmailAndPassword, getAuth, GoogleAuthProvider, onAuthStateChanged, sendPasswordResetEmail, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile,
 } from 'firebase/auth'
 import app from '../../firebase/firebase.config'
+import { toast } from 'react-toastify'
 
 export const AuthContext = createContext()
 const auth = getAuth(app)
@@ -22,14 +14,14 @@ const googleProvider = new GoogleAuthProvider()
 const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null)
     const [loading, setLoading] = useState(true)
-    console.log(user)
-    //1. Create User
+
+    //Create User
     const createUser = (email, password) => {
         setLoading(true)
         return createUserWithEmailAndPassword(auth, email, password)
     }
 
-    //   2. Update Name
+    //Update Name and photoURL
     const updateUserProfile = (name, photo) => {
         setLoading(true)
         return updateProfile(auth.currentUser, {
@@ -38,46 +30,42 @@ const AuthProvider = ({ children }) => {
         })
     }
 
-    //   3. Email Verify
-    const verifyEmail = () => {
-        setLoading(true)
-        return sendEmailVerification(auth.currentUser)
-    }
-
-    // 4. Google Signin
+    // Handle Google Signin
     const signInWithGoogle = () => {
         setLoading(true)
         return signInWithPopup(auth, googleProvider)
     }
 
-    // 5. Logout
+    // handle Logout
     const logout = () => {
         setLoading(true)
         localStorage.removeItem('computerBazar-token')
+        toast.success('You have logged out from Computer Bazar');
         return signOut(auth)
     }
 
-    //6. Login with Password
+    // sign in with email and Password
     const signIn = (email, password) => {
         setLoading(true)
         return signInWithEmailAndPassword(auth, email, password)
     }
 
-    //7. Forget Password
+    //reset Password
     const resetPassword = email => {
         setLoading(true)
         return sendPasswordResetEmail(auth, email)
     }
 
     useEffect(() => {
-        //this part will execute once the component is mounted.
+        //on statechange observer
         const unsubscribe = onAuthStateChanged(auth, currentUser => {
+            console.log('observer', currentUser);
             setUser(currentUser)
             setLoading(false)
         })
 
         return () => {
-            //this part will execute once the component is unmounted.
+
             unsubscribe()
         }
     }, [])
@@ -87,7 +75,6 @@ const AuthProvider = ({ children }) => {
         loading,
         createUser,
         updateUserProfile,
-        verifyEmail,
         signInWithGoogle,
         logout,
         signIn,
