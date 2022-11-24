@@ -4,7 +4,7 @@ const Newsletter = () => {
     return (
         <section className="bg-base-200">
             <div
-                className="mx-auto max-w-screen-xl px-4 py-32 lg:flex lg:items-center"
+                className="mx-auto max-w-screen-xl px-4 py-16 md:py-32 lg:flex lg:items-center"
             >
                 <div className="mx-auto max-w-5xl text-center">
                     <h1
