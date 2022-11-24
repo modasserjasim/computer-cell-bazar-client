@@ -2,7 +2,7 @@ import React from 'react';
 
 const AdvertisedCard = () => {
     return (
-        <div className="w-full overflow-hidden bg-base-200 rounded-lg shadow-lg">
+        <div className="w-full overflow-hidden bg-base-100 rounded-lg shadow-lg">
             <img className="object-cover object-center w-full h-56" src="https://images.unsplash.com/photo-1517841905240-472988babdf9?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=334&q=80" alt="avatar" />
 
             <div className="flex items-center px-6 py-3 bg-gray-900">
