@@ -1,0 +1,50 @@
+[
+    {
+        "title": "HP Follio 1040g2 Ultra Slim and Premium",
+        "publishedDate": "24.11.2022",
+        "location": "Dhaka",
+        "resalePrice": 15500,
+        "originalPrice": 45900,
+        "yearsOfUse": 3,
+        "category_id": "hp-laptops",
+        "sellerName": "Modasser Jasim",
+        "isSellerVerified": false,
+        "imgURL": "https://i.ibb.co/DtGmMbX/hp-used.jpg"
+    },
+    {
+        "title": "Dell Follio 1040g2 Ultra Slim and Premium",
+        "publishedDate": "25.11.2022",
+        "location": "Rajshahi",
+        "resalePrice": 25500,
+        "originalPrice": 60900,
+        "yearsOfUse": 3,
+        "category_id": "dell-laptops",
+        "sellerName": "Ehan Modasser",
+        "isSellerVerified": true,
+        "imgURL": "https://i.ibb.co/R4hW7Pc/dell-used.jpg"
+    },
+    {
+        "title": "Apple Macbook Ultra Slim and Premium",
+        "publishedDate": "26.11.2022",
+        "location": "Dhaka",
+        "resalePrice": 75300,
+        "originalPrice": 145900,
+        "yearsOfUse": 2,
+        "category_id": "apple-laptops",
+        "sellerName": "Modasser Jasim",
+        "isSellerVerified": false,
+        "imgURL": "https://i.ibb.co/1sXxMv0/apple-used.jpg"
+    },
+    {
+        "title": "HP Pavilion G6 Ultra Slim and Premium",
+        "publishedDate": "27.11.2022",
+        "location": "Dhaka",
+        "resalePrice": 39500,
+        "originalPrice": 55900,
+        "yearsOfUse": 1,
+        "category_id": "hp-laptops",
+        "sellerName": "Modasserul H",
+        "isSellerVerified": true,
+        "imgURL": "https://i.ibb.co/DtGmMbX/hp-used.jpg"
+    }
+]
