@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
+import Loading from '../../../components/Spinners/Loading';
 import CategoryCard from './CategoryCard';
 
 const Categories = () => {
-    const { data: productCategories = [] } = useQuery({
+    const { data: productCategories = [], isLoading } = useQuery({
         queryKey: ['product-categories'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_API_URL}/product-categories`);
@@ -12,6 +13,10 @@ const Categories = () => {
         }
 
     })
+
+    if (isLoading) {
+        return <Loading></Loading>
+    }
     return (
         <section className="body-font bg-base-100">
             <div className="container py-12 px-4 mx-auto">

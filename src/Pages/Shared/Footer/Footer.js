@@ -5,7 +5,7 @@ import { IoLaptopOutline } from "react-icons/io5";
 const Footer = () => {
     return (
         <footer className="text-center lg:text-left bg-base-100">
-            <div className=" p-6 border-b border-base-200">
+            <div className=" p-6 border-y border-base-200">
                 <div className='max-w-7xl mx-auto flex justify-center items-center lg:justify-between'>
                     <div className="mr-12 hidden lg:block">
                         <span>Get connected with us on social networks:</span>

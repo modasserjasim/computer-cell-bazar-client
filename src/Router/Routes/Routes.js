@@ -4,6 +4,7 @@ import Blog from "../../Pages/Blog/Blog";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import Home from "../../Pages/Homes/Home/Home";
 import Login from "../../Pages/Login/Login";
+import CategoryProducts from "../../Pages/Products/CategoryProducts/CategoryProducts";
 import Signup from "../../Pages/Signup/Signup";
 
 
@@ -28,6 +29,10 @@ export const router = createBrowserRouter([
             {
                 path: '/signup',
                 element: <Signup></Signup>
+            },
+            {
+                path: '/category/:id',
+                element: <CategoryProducts></CategoryProducts>
             },
 
         ]

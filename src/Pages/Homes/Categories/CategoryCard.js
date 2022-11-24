@@ -8,7 +8,7 @@ const CategoryCard = ({ category }) => {
             <img
                 alt={name}
                 src={photoURL}
-                className="absolute inset-0 h-full w-full object-cover transition-opacity group-hover:opacity-90"
+                className="absolute inset-0 h-full rounded-md w-full object-cover transition-opacity group-hover:opacity-90"
             />
 
             <div
