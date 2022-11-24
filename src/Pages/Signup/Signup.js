@@ -5,6 +5,7 @@ import { toast } from 'react-toastify';
 import { BsEye, BsEyeSlash } from "react-icons/bs";
 import { AuthContext } from '../../context/AuthProvider/AuthProvider';
 import useToken from '../../hooks/useToken';
+import Spinner from '../../components/Spinners/Spinner';
 
 const Signup = () => {
     const [passwordShown, setPasswordShown] = useState(false);
@@ -39,22 +40,25 @@ const Signup = () => {
                         .then(result => {
                             const user = result.user;
                             toast.success(`You have successfully created your account, ${data.name}`);
-                            //update username/profile
+                            //update profile
                             updateUserProfile(data.name, imgData.data.display_url)
                                 .then(() => {
-                                    saveUserToDB(user.displayName, user.email, user.photoURL)
+                                    saveUserToDB(user.displayName, user.email, user.photoURL, data.role)
+
                                 })
                                 .catch(err => toast.error(err));
-                            // logOut();
 
                         })
-                        .catch(err => toast.success(err.code))
+                        .catch(err => {
+                            toast.success(err.code);
+                            setLoading(false);
+                        })
                 }
             })
 
     }
-    const saveUserToDB = (name, email, photoURL) => {
-        const user = { name, email, photoURL };
+    const saveUserToDB = (name, email, photoURL, role) => {
+        const user = { name, email, photoURL, role };
         fetch(`${process.env.REACT_APP_API_URL}/user`, {
             method: "POST",
             headers: {
@@ -65,7 +69,7 @@ const Signup = () => {
             .then(res => res.json())
             .then(data => {
                 console.log('save user', data);
-                setCreatedUserEmail(email);
+                setCreatedUserEmail(user.email);
             })
     }
 
@@ -83,23 +87,23 @@ const Signup = () => {
                     </div>
                     <form onSubmit={handleSubmit(handleSignUp)}>
                         <div className="relative">
-                            <input {...register("name", { required: "Name is required" })} type="text" name='name' id="floating_outlined" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
-                            <label htmlFor="floating_outlined" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Your Name</label>
+                            <input {...register("name", { required: "Name is required" })} type="text" name='name' id="floating_outlined-name" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                            <label htmlFor="floating_outlined-name" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Your Name</label>
                             <div>
                                 {errors.email && <p role="alert" className='text-red-700 text-xs'>{errors.email?.message}</p>}
                             </div>
                         </div>
                         <div className="relative mt-4">
-                            <input {...register("img", { required: "Image is required" })} type="file" name='img' id="floating_outlined" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
-                            <label htmlFor="floating_outlined" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Choose Profile Photo</label>
+                            <input {...register("img", { required: "Image is required" })} type="file" name='img' id="floating_outlined-img" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                            <label htmlFor="floating_outlined-img" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Choose Profile Photo</label>
                             <div>
                                 {errors.img && <p role="alert" className='text-red-700 text-xs'>{errors.img?.message}</p>}
                             </div>
 
                         </div>
                         <div className="relative mt-4">
-                            <input {...register("email", { required: "Email Address is required" })} type="email" id="floating_outlined2" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
-                            <label htmlFor="floating_outlined2" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Email Address</label>
+                            <input {...register("email", { required: "Email Address is required" })} type="email" id="floating_outlined-email" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                            <label htmlFor="floating_outlined-email" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Email Address</label>
                             <div>
                                 {errors.email && <p role="alert" className='text-red-700 text-xs'>{errors.email?.message}</p>}
                             </div>
@@ -114,8 +118,8 @@ const Signup = () => {
                                             value: /(?=.*[A-Z])(?=.*[!@#$&*])(?=.*[0-9])(?=.*[a-z]).{8}/
                                             , message: "Please use symbol, num, upper & lowercase"
                                         }
-                                    })} type={passwordShown ? "text" : "password"} id="floating_outlined3" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
-                                    <label htmlFor="floating_outlined3" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Password</label>
+                                    })} type={passwordShown ? "text" : "password"} id="floating_outlined-pass" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                                    <label htmlFor="floating_outlined-pass" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Password</label>
                                 </div>
                                 <div onClick={() => setPasswordShown(!passwordShown)} className="absolute right-0 mr-3 cursor-pointer">
                                     {
@@ -126,10 +130,29 @@ const Signup = () => {
                             </div>
                             {errors.password && <p role="alert" className='text-red-700 text-xs'>{errors.password?.message}</p>}
                         </div>
+                        <div className="relative mt-4">
+                            <div className='flex gap-3'>
+                                <select {...register("role")}
+                                    name="role"
+                                    id="floating_outlined-radio"
+                                    className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
+                                    placeholder='Select Your Role'
+                                    required
+                                >
+                                    <option value='buyer'>Buyer</option>
+                                    <option value='seller'>Seller</option>
+                                </select>
+                            </div>
+
+                            <label htmlFor="floating_outlined-radio" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">I'm creating account as a</label>
+
+                        </div>
+
 
                         <div className="mt-8">
-                            <button type="submit" className="text-lg rounded-md font-semibold leading-none text-white focus:outline-none bg-gradient-to-tl from-primary to-secondary border rounded hover:bg-secondary py-4 w-full">
-                                Create my account
+                            <button type="submit" className="text-lg rounded-md font-semibold leading-none text-white focus:outline-none bg-gradient-to-tl from-primary to-secondary border hover:bg-secondary py-4 w-full">
+
+                                {loading ? <Spinner /> : 'Create my account'}
                             </button>
                         </div>
                     </form>

@@ -6,7 +6,6 @@ import { BiUser, BiEdit } from "react-icons/bi";
 import { VscSignOut } from "react-icons/vsc";
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
-import { toast } from 'react-toastify';
 import { themeChange } from 'theme-change';
 
 const Header = () => {
@@ -27,8 +26,8 @@ const Header = () => {
                             {/* <img src={logo} alt="Logo" className='w-44' /> */}
                             <IoLaptopOutline className='text-5xl md:text-7xl text-primary' />
                             <div>
-                                <h2 className='text-xl md:text-3xl font-extrabold leading-none'>Computer</h2>
-                                <h2 className='text-xl md:text-3xl md:-mt-2 font-extrabold leading-none'>Bazar</h2>
+                                <h2 className='text-xl md:text-2xl font-extrabold leading leading-5'>Computer</h2>
+                                <h2 className='text-xl md:text-2xl md:-mt-2 font-extrabold leading-5'>Cell Bazar</h2>
                             </div>
                         </Link>
 
