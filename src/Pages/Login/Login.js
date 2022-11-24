@@ -38,16 +38,39 @@ const Login = () => {
             });
     }
     const handleGoogleSignin = () => {
-        signInWithGoogle().then(result => {
-            const user = result.user;
-            setLoginUserEmail(user.email);
-            toast.success(`${user.displayName}, you have successfully logged in!`)
+        signInWithGoogle()
+            .then(result => {
+                const user = result.user;
+                saveUserToDB(user);
+                setLoginUserEmail(user.email);
+                toast.success(`${user.displayName}, you have successfully logged in!`)
 
+            })
+    }
+
+    const saveUserToDB = user => {
+        const currentUser = {
+            name: user.displayName,
+            email: user.email,
+            photoURL: user.photoURL,
+            role: 'buyer'
+        };
+        fetch(`${process.env.REACT_APP_API_URL}/user/${user?.email}`, {
+            method: "PUT",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(currentUser)
         })
+            .then(res => res.json())
+            .then(data => {
+                console.log('save user using GoogleSignIn', data);
+                setLoginUserEmail(user.email);
+            })
     }
 
     return (
-        <div className="h-full bg-gray-100 w-full py-16 px-4">
+        <div className="h-full bg-base-200 w-full py-16 px-4">
             <div className="flex flex-col items-center justify-center">
 
                 <div className="bg-white shadow rounded lg:w-1/3  md:w-1/2 w-full p-5 md:p-10">
