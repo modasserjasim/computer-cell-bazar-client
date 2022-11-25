@@ -3,7 +3,7 @@ import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const BookingModal = ({ product, setProduct }) => {
     const { user } = useContext(AuthContext);
-    const { title, resalePrice } = product;
+    const { _id, title, resalePrice } = product;
 
     const handleBooking = e => {
         e.preventDefault();
@@ -11,12 +11,24 @@ const BookingModal = ({ product, setProduct }) => {
 
         const bookingInfo = {
             productName: title,
+            productId: _id,
             price: form.price.value,
             buyerName: form.name.value,
             email: form.email.value,
             phone: form.phone.value,
             meetingLocation: form.location.value,
         }
+        fetch(`${process.env.REACT_APP_API_URL}/booking`, {
+            method: "POST",
+            headers: {
+                "content-type": "application/json"
+            },
+            body: JSON.stringify(bookingInfo)
+        })
+            .then(res => res.json())
+            .then(data => {
+                console.log(data);
+            })
 
     }
     return (
