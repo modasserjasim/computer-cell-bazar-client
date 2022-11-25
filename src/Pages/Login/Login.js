@@ -64,7 +64,7 @@ const Login = () => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log('save user using GoogleSignIn', data);
+                // console.log('save user using GoogleSignIn', data);
                 setLoginUserEmail(user.email);
             })
     }

@@ -1,4 +1,5 @@
 import React, { useContext } from 'react';
+import { toast } from 'react-toastify';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const BookingModal = ({ product, setProduct }) => {
@@ -27,7 +28,13 @@ const BookingModal = ({ product, setProduct }) => {
         })
             .then(res => res.json())
             .then(data => {
-                console.log(data);
+                if (data.status) {
+                    setProduct(null);
+                    toast.success(data.message);
+
+                } else {
+                    toast.error(data.error)
+                }
             })
 
     }

@@ -1,4 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
+import DashboardLayout from "../../layouts/DashboardLayout";
 import Main from "../../layouts/Main";
 import Blog from "../../Pages/Blog/Blog";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
@@ -35,6 +36,14 @@ export const router = createBrowserRouter([
                 element: <CategoryProducts></CategoryProducts>,
                 loader: ({ params }) => fetch(`${process.env.REACT_APP_API_URL}/category/${params.id}`)
             },
+
+        ]
+    },
+    {
+        path: '/dashboard',
+        element: <DashboardLayout></DashboardLayout>,
+        errorElement: <ErrorPage></ErrorPage>,
+        children: [
 
         ]
     }

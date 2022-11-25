@@ -6,7 +6,7 @@ import ProductCard from '../ProductCard/ProductCard';
 const CategoryProducts = () => {
     const { categoryProducts } = useLoaderData();
     const [product, setProduct] = useState(null);
-    console.log(categoryProducts);
+
     return (
         <div className='bg-base-200 py-20 px-4'>
             <div className='max-w-7xl mx-auto'>
