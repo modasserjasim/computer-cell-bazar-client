@@ -5,14 +5,14 @@ import { GoVerified, GoLocation, GoCalendar } from "react-icons/go";
 
 const ProductCard = ({ product, setProduct }) => {
     const { user } = useContext(AuthContext);
-    const { title, publishedDate, location, resalePrice, originalPrice, yearsOfUse, sellerName, isSellerVerified, imgURL } = product;
+    const { title, publishedDate, location, resalePrice, originalPrice, yearsOfUse, sellerName, isSellerVerified, imgURL, sellerImgURL } = product;
     return (
         <div className="w-full overflow-hidden bg-base-100 rounded-lg shadow-lg">
             <img className="object-cover object-center w-full h-56" src={imgURL} alt='PRODUCT' />
 
             <div className='flex justify-between px-6 py-2 bg-gray-900'>
                 <div className="flex items-center ">
-                    <img src={user?.photoURL} className="w-12 btn-circle" alt="USER" />
+                    <img src={sellerImgURL} className="w-12 btn-circle" alt="USER" />
 
                     <h2 className="mx-3 text-lg font-semibold text-white">{sellerName}</h2>
                     {

@@ -1,19 +1,21 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext } from 'react';
-import { useForm } from 'react-hook-form';
+import React, { useContext, useState } from 'react';
+import { useForm, useFormState } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loading from '../../../components/Spinners/Loading';
+import Spinner from '../../../components/Spinners/Spinner';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const AddProduct = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { user } = useContext(AuthContext);
+    const [loading, setLoading] = useState(false)
     const navigate = useNavigate();
     const date = new Date().toLocaleString().split(',')[0];
     // console.log(date);
 
-    // get product categories from db collection
+    // get product categories from db collection to assign the dropdown
     const { data: categories = [], isLoading } = useQuery({
         queryKey: ['product-categories'],
         queryFn: async () => {
@@ -23,10 +25,9 @@ const AddProduct = () => {
         }
 
     })
-    console.log(categories);
 
     const handleAddProduct = data => {
-        console.log(data);
+        setLoading(true);
         // add image to imageBB
         const image = data.img[0];
         const formData = new FormData();
@@ -54,10 +55,13 @@ const AddProduct = () => {
                         phone: data.phone,
                         category_id: data.category,
                         sellerName: user.displayName,
+                        sellerEmail: user.email,
+                        sellerImgURL: user.photoURL,
                         imgURL: productImg,
                         description: data.description
 
                     }
+                    console.log(productInfo);
                     //save product information to the database
                     fetch(`${process.env.REACT_APP_API_URL}/product`, {
                         method: "POST",
@@ -70,10 +74,12 @@ const AddProduct = () => {
                         .then(res => res.json())
                         .then(result => {
                             if (result.status) {
+                                setLoading(false);
                                 toast.success(result.message);
                                 navigate('/dashboard/my-products')
                             } else {
-                                toast.error(result.error)
+                                toast.error(result.error);
+
                             }
                         })
                 }
@@ -82,6 +88,7 @@ const AddProduct = () => {
     if (isLoading) {
         return <Loading></Loading>
     }
+
     return (
         <div>
             <h1 className='text-3xl mb-5'>Add A New Product</h1>
@@ -169,8 +176,8 @@ const AddProduct = () => {
                     </div>
                 </div>
                 <div className="relative mt-4 w-full">
-                    <textarea {...register("description", { required: "Product description is required" })} name='description' type="textarea" id="floating_outlined_yearsOfUse" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
-                    <label htmlFor="floating_outlined_yearsOfUse" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Product Description</label>
+                    <textarea {...register("description", { required: "Product description is required" })} name='description' type="textarea" id="floating_outlined_description" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                    <label htmlFor="floating_outlined_description" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Product Description</label>
                     <div>
                         {errors.description && <p role="alert" className='text-red-700 text-xs'>{errors.description?.message}</p>}
                     </div>
@@ -178,7 +185,7 @@ const AddProduct = () => {
 
                 <div className="mt-8">
                     <button type="submit" className="text-lg rounded-md font-semibold leading-none text-white focus:outline-none bg-gradient-to-tl from-primary to-secondary border hover:bg-secondary py-4 w-full">
-                        Add New Product
+                        {loading ? <Spinner /> : 'Add New Product'}
                     </button>
                 </div>
             </form>
