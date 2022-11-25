@@ -22,7 +22,7 @@ const Newsletter = () => {
                     <div className="mx-auto max-w-lg">
                         <form className="mt-6">
                             <div className="relative max-w-lg">
-                                <label className="sr-only" for="email"> Email </label>
+                                <label className="sr-only" htmlFor="email"> Email </label>
 
                                 <input
                                     className="w-full rounded-full border-base-300 bg-base-100 p-6 pr-32 text-sm font-medium"
