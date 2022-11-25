@@ -1,9 +1,11 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import BookingModal from '../BookingModal/BookingModal';
 import ProductCard from '../ProductCard/ProductCard';
 
 const CategoryProducts = () => {
     const { categoryProducts } = useLoaderData();
+    const [product, setProduct] = useState(null);
     console.log(categoryProducts);
     return (
         <div className='bg-base-200 py-20 px-4'>
@@ -13,11 +15,22 @@ const CategoryProducts = () => {
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-20'>
                     {
                         categoryProducts.length > 0 && (
-                            categoryProducts.map(product => <ProductCard key={product._id} product={product}></ProductCard>)
+                            categoryProducts.map(product => <ProductCard
+                                key={product._id}
+                                product={product}
+                                setProduct={setProduct}>
+                            </ProductCard>)
                         )
                     }
                 </div>
             </div>
+            {
+                product && <BookingModal
+                    product={product}
+                    setProduct={setProduct}
+                >
+                </BookingModal>
+            }
         </div>
     );
 };
