@@ -5,6 +5,9 @@ Computer Cell Bazar is classified ads website for second hand laptop computers. 
 
 Hosted in Firebase -> [Computer Bazar](https://computer-bazar.web.app/)
 
+**adminEmail:** ehan1@afnan.com
+**adminPassword:** Ehan1@afnan.com
+
 ## The features I use in this project
 - This classified website has 8 pages including login, sign up, services and my reviews, and the routing path is handled by the React router dom createBrowserRouter().
 - In this project, I implement CRUD operations such as creating the data like service and review using the POST method, reading the data from the server using the GET method, updating the data using the PATCH method, and deleting the data using the DELETE method.
