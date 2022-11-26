@@ -16,7 +16,7 @@ const CategoryCard = ({ category }) => {
             >
                 <h3 className="text-lg uppercase">{name}</h3>
 
-                <p className="mt-1 text-xs font-medium uppercase">Explore your desired category</p>
+                <p className="mt-1 text-xs font-medium uppercase">Explore your desired brand</p>
             </div>
         </Link>
 

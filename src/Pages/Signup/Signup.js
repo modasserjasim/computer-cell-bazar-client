@@ -9,6 +9,7 @@ import Spinner from '../../components/Spinners/Spinner';
 
 const Signup = () => {
     const [passwordShown, setPasswordShown] = useState(false);
+    const [userRole, setUserRole] = useState('buyer');
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { createUser, updateUserProfile, loading, setLoading, } = useContext(AuthContext);
 
@@ -22,7 +23,7 @@ const Signup = () => {
     }
 
     const handleSignUp = data => {
-        console.log(data);
+        // console.log(data);
         // add image to imageBB
         const image = data.img[0];
         const formData = new FormData();
@@ -43,7 +44,7 @@ const Signup = () => {
                             //update profile
                             updateUserProfile(data.name, imgData.data.display_url)
                                 .then(() => {
-                                    saveUserToDB(user.displayName, user.email, user.photoURL, data.role)
+                                    saveUserToDB(user.displayName, user.email, user.photoURL, userRole)
 
                                 })
                                 .catch(err => toast.error(err));
@@ -132,7 +133,9 @@ const Signup = () => {
                         </div>
                         <div className="relative mt-4">
                             <div className='flex gap-3'>
-                                <select {...register("role")}
+                                <select onChange={(event) => setUserRole(event.target.value)}
+                                    value={userRole}
+
                                     name="role"
                                     id="floating_outlined-radio"
                                     className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"

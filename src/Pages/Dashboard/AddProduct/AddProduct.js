@@ -10,7 +10,10 @@ import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 const AddProduct = () => {
     const { register, formState: { errors }, handleSubmit } = useForm();
     const { user } = useContext(AuthContext);
-    const [loading, setLoading] = useState(false)
+    const [loading, setLoading] = useState(false);
+    const [condition, setCondition] = useState('Excellent');
+    const [productCategory, setProductCategory] = useState('apple-laptops');
+    console.log(condition, productCategory);
     const navigate = useNavigate();
     const date = new Date().toLocaleString().split(',')[0];
     // console.log(date);
@@ -28,6 +31,8 @@ const AddProduct = () => {
 
     const handleAddProduct = data => {
         setLoading(true);
+        // console.log(data);
+
         // add image to imageBB
         const image = data.img[0];
         const formData = new FormData();
@@ -49,11 +54,11 @@ const AddProduct = () => {
                         publishedDate: date,
                         resalePrice: data.sellingPrice,
                         originalPrice: data.originalPrice,
-                        condition: data.condition,
+                        condition: condition,
                         yearsOfUse: data.yearsOfUse,
                         location: data.location,
                         phone: data.phone,
-                        category_id: data.category,
+                        category_id: productCategory,
                         sellerName: user.displayName,
                         sellerEmail: user.email,
                         sellerImgURL: user.photoURL,
@@ -126,8 +131,9 @@ const AddProduct = () => {
 
                 </div>
                 <div className="relative mt-4">
-                    <select {...register("category", { required: "Category is required" })}
-                        name="slot"
+                    <select onChange={(event) => setProductCategory(event.target.value)}
+                        value={productCategory}
+                        name="category"
                         id="floating_outlined_time"
                         className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
                         placeholder='Select category'
@@ -142,8 +148,8 @@ const AddProduct = () => {
 
                 </div>
                 <div className="relative mt-4">
-                    <select {...register("condition", { required: "Product Condition is required" })}
-                        name="slot"
+                    <select onChange={(event) => setCondition(event.target.value)}
+                        value={condition}
                         id="floating_outlined_time"
                         className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer"
                         placeholder=''
