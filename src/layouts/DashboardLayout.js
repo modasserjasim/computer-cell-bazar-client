@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-import { NavLink, Outlet } from 'react-router-dom';
+import { NavLink, Outlet, ScrollRestoration } from 'react-router-dom';
 import { AuthContext } from '../context/AuthProvider/AuthProvider';
 import useAdmin from '../hooks/useAdmin';
 import Footer from '../Pages/Shared/Footer/Footer';
@@ -19,10 +19,24 @@ const DashboardLayout = () => {
         <div>
             <Header></Header>
             <div className="sm:flex border-t border-base-200">
-                <div className="flex flex-col md:min-h-screen p-3 bg-gradient-to-r from-primary to-secondary md:w-72">
+                <div className="flex flex-col md:min-h-screen p-3 bg-gradient-to-r from-primary to-secondary sm:w-60 md:w-80">
                     <div className="space-y-3 md:sticky md:top-24">
-                        <div className="flex items-center justify-center md:justify-start">
-                            <h2 className="text-xl text-white text-center md:text-left font-bold">Dashboard</h2>
+                        <div className="hidden sm:block">
+                            <div id="profile" className="space-y-3">
+                                <img
+                                    src={user?.photoURL}
+                                    alt="Avatar user"
+                                    className="w-10 md:w-16 rounded-full mx-auto"
+                                />
+                                <div>
+                                    <h2
+                                        className="font-medium text-white text-sm md:text-lg text-center"
+                                    >
+                                        {user?.displayName}
+                                    </h2>
+                                    <p className="text-xs text-gray-200 text-center">Administrator</p>
+                                </div>
+                            </div>
                         </div>
                         <div className="flex-1">
                             <ul className="pt-2 pb-4 space-y-3 text-sm flex justify-between items-center sm:block">
@@ -86,6 +100,7 @@ const DashboardLayout = () => {
                 </div>
                 <div className="mx-auto my-7 sm:my-12 container px-5 md:px-20 lg:px-32">
                     <Outlet></Outlet>
+                    <ScrollRestoration />
                 </div>
             </div>
             <Footer></Footer>
