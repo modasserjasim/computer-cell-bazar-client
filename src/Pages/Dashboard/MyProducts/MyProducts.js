@@ -4,6 +4,7 @@ import Loading from '../../../components/Spinners/Loading';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import { RiEditBoxLine, RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from 'react-toastify';
+import Swal from 'sweetalert2'
 
 
 const MyProducts = () => {
@@ -22,7 +23,8 @@ const MyProducts = () => {
         }
     })
 
-    const handleSaleStatus = id => {
+    //handle mark the product as sold
+    const handleSoldStatus = id => {
         fetch(`${process.env.REACT_APP_API_URL}/my-product/${id}`, {
             method: 'PATCH',
             headers: {
@@ -40,6 +42,80 @@ const MyProducts = () => {
                 }
 
             })
+    }
+    //handle mark the product as available again
+    const handleAvailableStatus = id => {
+        fetch(`${process.env.REACT_APP_API_URL}/my-product/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('computerBazar-token')}`
+            },
+            body: JSON.stringify({ status: false })
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if (data.status) {
+                    refetch();
+                    toast.success(data.message);
+                }
+
+            })
+    }
+    //handle make the product as advertised/boosted
+    const handleAdvertised = id => {
+        fetch(`${process.env.REACT_APP_API_URL}/my-product/ad/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('computerBazar-token')}`
+            },
+            body: JSON.stringify({ status: true })
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if (data.status) {
+                    refetch();
+                    toast.success(data.message);
+                }
+
+            })
+    }
+    const handleProductDelete = id => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`${process.env.REACT_APP_API_URL}/my-product/${id}`, {
+                    method: "DELETE",
+                    headers: {
+                        authorization: `bearer ${localStorage.getItem('computerBazar-token')}`
+                    }
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        // console.log(data);
+                        if (data.status) {
+                            refetch();
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Your Product has been deleted!',
+                                showConfirmButton: false,
+                                timer: 2000
+                            })
+                        }
+                    })
+
+            }
+        })
     }
 
     if (isLoading) {
@@ -73,30 +149,31 @@ const MyProducts = () => {
                                 <td>
                                     {
                                         product.resalePrice && !product.isSold && <button
-                                            onClick={() => handleSaleStatus(product._id)}
+                                            onClick={() => handleSoldStatus(product._id)}
                                             className='btn btn-primary btn-sm text-white tooltip' data-tip="Click to Mark as Sold">Available</button>
 
                                     }
                                     {
                                         product.resalePrice && product.isSold && <button
-
-                                            className='btn btn-secondary btn-sm bg-red text-white tooltip' data-tip="Click to Mark as Available">Sold</button>
+                                            onClick={() => handleAvailableStatus(product._id)}
+                                            className='btn btn-secondary btn-sm bg-red-700 text-white tooltip' data-tip="Click to Mark as Available">Sold</button>
                                     }
                                 </td>
                                 <td>
                                     {
                                         !product.isSold && !product.isAdvertised && <button
+                                            onClick={() => handleAdvertised(product._id)}
                                             className='btn btn-primary btn-sm text-white tooltip' data-tip="Click to Ad your Product">Boost Now</button>
 
                                     }
                                     {
                                         !product.isSold && product.isAdvertised && <button
-                                            className='btn bg-green-600 btn-sm tooltip' data-tip="Click to remove from ad">Boosted</button>
+                                            className='btn bg-green-700 text-white btn-sm' >Boosted</button>
                                     }
                                 </td>
                                 <td>
-                                    <label htmlFor="confirmation-modal" className="btn btn-ghost mr-2 p-0"><RiDeleteBin6Line className='text-2xl' /></label>
-                                    <button className='btn btn-ghost p-0'><RiEditBoxLine className='text-2xl' /></button>
+                                    <button onClick={() => handleProductDelete(product._id)} className="btn btn-ghost mr-2 p-0"><RiDeleteBin6Line className='text-2xl' /></button>
+                                    {/* <button className='btn btn-ghost p-0'><RiEditBoxLine className='text-2xl' /></button> */}
                                 </td>
                             </tr>)
                         }

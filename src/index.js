@@ -17,6 +17,7 @@ root.render(
     <QueryClientProvider client={queryClient}>
       <AuthProvider>
         <App />
+
         <ToastContainer
           position="top-center"
           autoClose={2500}
