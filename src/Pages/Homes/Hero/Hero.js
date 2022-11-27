@@ -11,7 +11,7 @@ const Hero = () => {
                             Computer Cell Bazar
                         </h1>
                         <p className="leading-normal text-2xl mb-8">
-                            A classified ads website for computer and it's part. We help people buy and sell laptop, desktop and computer parts.
+                            Computer Cell Bazar is a classified ads website for second hand computers. We help people buy and sell laptop, desktop and computer parts.
                         </p>
                         <button className="mx-auto lg:mx-0 hover:underline bg-white text-gray-800 font-bold rounded-full my-6 py-4 px-8 shadow-lg focus:outline-none focus:shadow-outline transform transition hover:scale-105 duration-300 ease-in-out">
                             Get Started

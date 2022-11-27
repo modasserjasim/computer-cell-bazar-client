@@ -14,7 +14,7 @@ const ProductCard = ({ product, setSelectedProduct }) => {
 
             <img className="object-cover object-center w-full h-56" src={imgURL} alt='PRODUCT' />
 
-            <div className='flex justify-between px-6 py-2 bg-gray-900'>
+            <div className='flex justify-between flex-wrap items-center px-6 py-2 bg-gray-900'>
                 <div className="flex items-center ">
                     <img src={sellerImgURL} className="w-12 btn-circle" alt="USER" />
 
