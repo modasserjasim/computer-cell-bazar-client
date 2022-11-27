@@ -9,7 +9,7 @@ const AllSellers = () => {
     const { data: allSellers = [], refetch } = useQuery({
         queryKey: ['all-sellers'],
         queryFn: async () => {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/all-seller`);
+            const res = await fetch(`${process.env.REACT_APP_API_URL}/all-sellers`);
             const data = await res.json();
             return data.allSellers;
         }
@@ -88,7 +88,7 @@ const AllSellers = () => {
                         {
                             allSellers?.map((seller, index) => <tr key={seller._id}>
                                 <th>{index + 1}</th>
-                                <td>{seller.name}</td>
+                                <td className='flex items-center gap-2'><img src={seller.photoURL} alt="img" className='w-10 h-10 btn-circle' />{seller.name}</td>
                                 <td>{seller.email}</td>
                                 <td> {
                                     seller?.isSellerVerified ? <span className='flex items-center gap-2 tooltip' data-tip="Verified Seller">
