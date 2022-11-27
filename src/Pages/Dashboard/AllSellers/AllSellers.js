@@ -4,9 +4,10 @@ import { GoVerified } from "react-icons/go";
 import { toast } from 'react-toastify';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from 'sweetalert2';
+import Loading from '../../../components/Spinners/Loading';
 
 const AllSellers = () => {
-    const { data: allSellers = [], refetch } = useQuery({
+    const { data: allSellers = [], isLoading, refetch } = useQuery({
         queryKey: ['all-sellers'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_API_URL}/all-sellers`);
@@ -68,6 +69,9 @@ const AllSellers = () => {
 
             }
         })
+    }
+    if (isLoading) {
+        return <Loading></Loading>;
     }
     return (
         <div>

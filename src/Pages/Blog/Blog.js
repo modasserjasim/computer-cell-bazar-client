@@ -50,6 +50,60 @@ const Blog = () => {
 
                 <div>
                     <h5 className="text-2xl font-bold">
+                        2. How does prototypical inheritance work?
+
+                    </h5>
+                    <div className="text-md mt-4">
+                        <p className='text-md sm:text-md mt-1  font-medium'>The Prototypal Inheritance is a feature in javascript used to add methods and properties in objects. It is a method by which an object can inherit the properties and methods of another object. </p>
+                        <p className='text-md  mt-3'>Traditionally, in order to get and set the <strong>[[Prototype]] </strong> of an object, we use <strong>Object.getPrototypeOf</strong> and <strong>Object.setPrototypeOf.</strong> Nowadays, in modern language, it is being set using <strong>__proto__</strong>.</p>
+                        <div className='flex justify-center my-4'>
+                            {/* <img src={prototype} alt="" /> */}
+                        </div>
+                        <p className='font-bold text-xl mt-4'>Syntax:<span className="ai-anchor"></span></p>
+                        <div className="my-3 ml-8">
+                            <span className='py-2 px-3 bg-gray-200 text-md rounded  font-bold font-specially'>ChildObject.__proto__ = ParentObject</span>
+                        </div>
+                        <div>
+                            <p className='text-md  mt-3'>So, the core idea of <strong>Prototypal Inheritance</strong> is that an object can point to another object and inherit all its properties. The main purpose is to allow multiple instances of an object to share common properties, hence, the Singleton Pattern.</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="relative block p-8 overflow-hidden border bg-base-100 border-slate-100 rounded-lg shadow-lg mt-10">
+                <span className="absolute inset-x-0 top-0 h-3 bg-gradient-to-r from-primary via-accent to-secondary"></span>
+
+                <div>
+                    <h5 className="text-2xl font-bold">
+                        3. What is a unit test? Why should we write unit tests?
+
+                    </h5>
+                    <div className="text-md mt-4">
+                        <p className='text-md sm:text-md mt-1  font-medium'><strong>Unit Testing</strong> is a type of software testing where individual units or components of a software are tested. The purpose is to validate that each unit of the software code performs as expected. </p>
+                        <p className='text-md  mt-3'>Unit Testing is done during the development (coding phase) of an application by the developers. Unit Tests isolate a section of code and verify its correctness. In SDLC, STLC, V Model, Unit testing is first level of testing done before integration testing.  </p>
+                        <div className='flex justify-center my-4'>
+                            {/* <img src={unitTest} alt="" /> */}
+                        </div>
+                        <p className='font-bold text-xl mt-4'>Heres why should we write unit test:-</p>
+                        <div className='mt-3'>
+                            <p className='text-md  font-medium'>To justify any effort in business, there must be a positive impact on the bottom line. Here are a few benefits to writing unit tests:</p>
+                            <ol className='list-decimal mt-2 ml-6'>
+                                <li><span className="text-md ">Unit tests save time and money. Usually, we tend to test the happy path more than the unhappy path. If you release such an app without thorough testing, you would have to keep fixing issues raised by your potential users.</span></li>
+                                <li><span className="text-md ">Well-written unit tests act as documentation for your code. Any developer can quickly look at your tests and know the purpose of your functions.</span></li>
+                                <li><span className="text-md ">It simplifies the debugging process.</span></li>
+                                <li><span className="text-md ">Unit testing is an integral part of extreme programming. Extreme programming is basically a “test-everything-that-can-possibly-break” programming strategy.</span></li>
+                                <li><span className="text-md ">Unit tests make code reuse easier. If you want to reuse existing code in a new project, you can simply migrate both the code and tests to your new project, then run your tests to make sure you have the desired results.</span></li>
+                                <li><span className="text-md ">Unit testing improves code coverage. A debatable topic is to have 100% code coverage across your application.</span></li>
+                                <li><span className="text-md ">In the testing pyramid, unit tests are faster than integration and end-to-end. They are more assertive and return quick feedback. </span></li>
+                            </ol>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div className="relative block p-8 overflow-hidden border bg-base-100 border-slate-100 rounded-lg shadow-lg mt-10">
+                <span className="absolute inset-x-0 top-0 h-3 bg-gradient-to-r from-primary via-accent to-secondary"></span>
+
+                <div>
+                    <h5 className="text-2xl font-bold">
                         4. React vs. Angular vs. Vue?
                     </h5>
                     <table className="text-left w-full border-collapse mt-4">
