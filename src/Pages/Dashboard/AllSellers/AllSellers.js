@@ -38,7 +38,7 @@ const AllSellers = () => {
     const handleSellerDelete = seller => {
         Swal.fire({
             title: 'Are you sure?',
-            text: `You want to delete ${seller.name} it won't be able to revert this!`,
+            text: `You want to delete the seller ${seller.name}. It won't be able to revert this!`,
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
@@ -59,7 +59,7 @@ const AllSellers = () => {
                             refetch();
                             Swal.fire({
                                 icon: 'success',
-                                title: 'Your Product has been deleted!',
+                                title: `The seller ${seller?.name} has been deleted!`,
                                 showConfirmButton: false,
                                 timer: 2000
                             })
@@ -91,12 +91,12 @@ const AllSellers = () => {
                                 <td>{seller.name}</td>
                                 <td>{seller.email}</td>
                                 <td> {
-                                    seller?.isSellerVerified ? <span className='tooltip' data-tip="Verified Seller">
-                                        <GoVerified className='text-blue-500 text-xl' />
+                                    seller?.isSellerVerified ? <span className='flex items-center gap-2 tooltip' data-tip="Verified Seller">
+                                        <GoVerified className='text-blue-500 text-xl' /> Verified
                                     </span> : <button onClick={() => handleVerifySeller(seller._id)} className='btn btn-xs bg-primary text-white border-0'>Verify Seller</button>
                                 }</td>
                                 <td>
-                                    <button onClick={() => handleSellerDelete(seller)} className="btn btn-ghost mr-2 p-0"><RiDeleteBin6Line className='text-2xl' /></button>
+                                    <button onClick={() => handleSellerDelete(seller)} className="p-0 hover:text-primary"><RiDeleteBin6Line className='text-2xl' /></button>
 
                                 </td>
                             </tr>)
