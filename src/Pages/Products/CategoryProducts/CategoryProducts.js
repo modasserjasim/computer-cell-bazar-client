@@ -5,7 +5,7 @@ import ProductCard from '../ProductCard/ProductCard';
 
 const CategoryProducts = () => {
     const { categoryProducts } = useLoaderData();
-    const [product, setProduct] = useState(null);
+    const [selectedProduct, setSelectedProduct] = useState(null);
 
     return (
         <div className='bg-base-200 py-20 px-4'>
@@ -14,20 +14,20 @@ const CategoryProducts = () => {
                 <hr className="my-4 mx-auto w-40 h-1 bg-gradient-to-r from-primary via-accent to-secondary rounded border-0 md:my-4" />
                 <div className='grid grid-cols-1 md:grid-cols-2 gap-5 mt-20'>
                     {
-                        categoryProducts.length > 0 && (
-                            categoryProducts.map(product => <ProductCard
-                                key={product._id}
-                                product={product}
-                                setProduct={setProduct}>
-                            </ProductCard>)
-                        )
+
+                        categoryProducts.map(product => <ProductCard
+                            key={product._id}
+                            product={product}
+                            setSelectedProduct={setSelectedProduct}>
+                        </ProductCard>)
+
                     }
                 </div>
             </div>
             {
-                product && <BookingModal
-                    product={product}
-                    setProduct={setProduct}
+                selectedProduct && <BookingModal
+                    selectedProduct={selectedProduct}
+                    setSelectedProduct={setSelectedProduct}
                 >
                 </BookingModal>
             }

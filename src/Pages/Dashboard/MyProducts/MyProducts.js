@@ -1,13 +1,15 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
 import Loading from '../../../components/Spinners/Loading';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
+import { RiEditBoxLine, RiDeleteBin6Line } from "react-icons/ri";
+import { toast } from 'react-toastify';
+
 
 const MyProducts = () => {
     const { user } = useContext(AuthContext);
     const url = `${process.env.REACT_APP_API_URL}/my-products?email=${user?.email}`;
-    const { data: products = [], isLoading } = useQuery({
+    const { data: products = [], isLoading, refetch } = useQuery({
         queryKey: ['my-products', user?.email],
         queryFn: async () => {
             const res = await fetch(url, {
@@ -19,7 +21,26 @@ const MyProducts = () => {
             return data.products;
         }
     })
-    console.log(products);
+
+    const handleSaleStatus = id => {
+        fetch(`${process.env.REACT_APP_API_URL}/my-product/${id}`, {
+            method: 'PATCH',
+            headers: {
+                'content-type': 'application/json',
+                authorization: `bearer ${localStorage.getItem('computerBazar-token')}`
+            },
+            body: JSON.stringify({ status: true })
+        })
+            .then(res => res.json())
+            .then(data => {
+                // console.log(data);
+                if (data.status) {
+                    refetch();
+                    toast.success(data.message);
+                }
+
+            })
+    }
 
     if (isLoading) {
         return <Loading></Loading>;
@@ -35,8 +56,8 @@ const MyProducts = () => {
                             <th>Product</th>
                             <th>Price</th>
                             <th>Condition</th>
-                            <th>Status</th>
-                            <th>Promotion</th>
+                            <th>Sales Status</th>
+                            <th>Advertised</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -51,29 +72,31 @@ const MyProducts = () => {
                                 <td>{product?.condition}</td>
                                 <td>
                                     {
-                                        product.resalePrice && !product.sold && <button
-                                            className='btn btn-primary btn-sm text-white'>Available</button>
+                                        product.resalePrice && !product.isSold && <button
+                                            onClick={() => handleSaleStatus(product._id)}
+                                            className='btn btn-primary btn-sm text-white tooltip' data-tip="Click to Mark as Sold">Available</button>
 
                                     }
                                     {
-                                        product.resalePrice && product.sold && <button
-                                            className='btn btn-primary btn-sm disabled'>Sold</button>
+                                        product.resalePrice && product.isSold && <button
+
+                                            className='btn btn-secondary btn-sm bg-red text-white tooltip' data-tip="Click to Mark as Available">Sold</button>
                                     }
                                 </td>
                                 <td>
                                     {
-                                        !product.sold && !product.advertised && <button
-                                            className='btn btn-primary btn-sm text-white'>Advertise</button>
+                                        !product.isSold && !product.isAdvertised && <button
+                                            className='btn btn-primary btn-sm text-white tooltip' data-tip="Click to Ad your Product">Boost Now</button>
 
                                     }
                                     {
-                                        product.advertised && <button
-                                            className='btn bg-green-600 btn-sm disabled'>Advertised</button>
+                                        !product.isSold && product.isAdvertised && <button
+                                            className='btn bg-green-600 btn-sm tooltip' data-tip="Click to remove from ad">Boosted</button>
                                     }
                                 </td>
                                 <td>
-                                    <label htmlFor="confirmation-modal" className="btn btn-xs mr-2">Delete</label>
-                                    <button className='btn btn-xs'>Edit</button>
+                                    <label htmlFor="confirmation-modal" className="btn btn-ghost mr-2 p-0"><RiDeleteBin6Line className='text-2xl' /></label>
+                                    <button className='btn btn-ghost p-0'><RiEditBoxLine className='text-2xl' /></button>
                                 </td>
                             </tr>)
                         }

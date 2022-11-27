@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useContext, useState } from 'react';
-import { useForm, useFormState } from 'react-hook-form';
+import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
 import Loading from '../../../components/Spinners/Loading';
@@ -68,7 +68,7 @@ const AddProduct = () => {
                     }
                     console.log(productInfo);
                     //save product information to the database
-                    fetch(`${process.env.REACT_APP_API_URL}/product`, {
+                    fetch(`${process.env.REACT_APP_API_URL}/add-product`, {
                         method: "POST",
                         headers: {
                             "content-type": "application/json",

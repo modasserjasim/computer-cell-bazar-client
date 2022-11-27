@@ -2,9 +2,9 @@ import React, { useContext } from 'react';
 import { toast } from 'react-toastify';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
-const BookingModal = ({ product, setProduct }) => {
+const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
     const { user } = useContext(AuthContext);
-    const { _id, title, resalePrice } = product;
+    const { _id, title, resalePrice } = selectedProduct;
 
     const handleBooking = e => {
         e.preventDefault();
@@ -13,7 +13,7 @@ const BookingModal = ({ product, setProduct }) => {
         const bookingInfo = {
             productName: title,
             productId: _id,
-            price: form.price.value,
+            price: resalePrice,
             buyerName: form.name.value,
             email: form.email.value,
             phone: form.phone.value,
@@ -29,7 +29,7 @@ const BookingModal = ({ product, setProduct }) => {
             .then(res => res.json())
             .then(data => {
                 if (data.status) {
-                    setProduct(null);
+                    setSelectedProduct(null);
                     toast.success(data.message);
 
                 } else {
@@ -44,7 +44,7 @@ const BookingModal = ({ product, setProduct }) => {
             <div className="modal">
                 <div className="modal-box relative bg-white">
                     <label htmlFor="booking-modal" className="btn btn-sm border-0 bg-gradient-to-r from-red-600 to-secondary text-white btn-circle absolute right-2 top-2">✕</label>
-                    <h3 className="text-lg font-bold">{title}</h3>
+                    <h3 className="text-lg font-bold">{title} - ৳{resalePrice}</h3>
                     <form onSubmit={handleBooking}>
 
                         <div className="relative mt-3">
@@ -56,7 +56,7 @@ const BookingModal = ({ product, setProduct }) => {
                             <label htmlFor="floating_outlined_email" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Email Address</label>
                         </div>
                         <div className="relative mt-3">
-                            <input name='price' type="number" defaultValue={resalePrice} disabled id="floating_outlined_price" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                            <input name='price' type="text" value={resalePrice} disabled id="floating_outlined_price" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
                             <label htmlFor="floating_outlined_price" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Product Price</label>
                         </div>
                         <div className="relative mt-3">

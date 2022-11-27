@@ -3,7 +3,7 @@ import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import { IoPricetagsOutline } from "react-icons/io5";
 import { GoVerified, GoLocation, GoCalendar } from "react-icons/go";
 
-const ProductCard = ({ product, setProduct }) => {
+const ProductCard = ({ product, setSelectedProduct }) => {
     const { user } = useContext(AuthContext);
     const { title, publishedDate, location, resalePrice, originalPrice, yearsOfUse, sellerName, isSellerVerified, imgURL, sellerImgURL } = product;
     return (
@@ -41,7 +41,7 @@ const ProductCard = ({ product, setProduct }) => {
                         <IoPricetagsOutline />
                         <h1 className="px-2 ">PRICE: ৳{resalePrice}</h1>
                     </div>
-                    <label onClick={() => setProduct(product)}
+                    <label onClick={() => setSelectedProduct(product)}
                         htmlFor="booking-modal"
                         className='btn btn-primary btn-sm text-white bg-gradient-to-r from-primary to-secondary'>Book Now</label>
                 </div>

@@ -9,6 +9,7 @@ import Home from "../../Pages/Homes/Home/Home";
 import Login from "../../Pages/Login/Login";
 import CategoryProducts from "../../Pages/Products/CategoryProducts/CategoryProducts";
 import Signup from "../../Pages/Signup/Signup";
+import PrivateRoute from "../PrivateRoute/PrivateRoute";
 
 
 export const router = createBrowserRouter([
@@ -35,7 +36,7 @@ export const router = createBrowserRouter([
             },
             {
                 path: '/category/:id',
-                element: <CategoryProducts></CategoryProducts>,
+                element: <PrivateRoute><CategoryProducts></CategoryProducts></PrivateRoute>,
                 loader: ({ params }) => fetch(`${process.env.REACT_APP_API_URL}/category/${params.id}`)
             },
 
@@ -43,8 +44,8 @@ export const router = createBrowserRouter([
     },
     {
         path: '/dashboard',
-        element: <DashboardLayout></DashboardLayout>,
         errorElement: <ErrorPage></ErrorPage>,
+        element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
                 path: '/dashboard/add-product',
