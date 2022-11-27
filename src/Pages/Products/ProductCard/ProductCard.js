@@ -2,10 +2,53 @@ import React, { useContext } from 'react';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import { IoPricetagsOutline } from "react-icons/io5";
 import { GoVerified, GoLocation, GoCalendar } from "react-icons/go";
+import { MdReportGmailerrorred, MdCheck } from "react-icons/md";
+import { toast } from 'react-toastify';
+import Swal from 'sweetalert2';
 
 const ProductCard = ({ product, setSelectedProduct }) => {
     const { user } = useContext(AuthContext);
-    const { title, publishedDate, location, resalePrice, originalPrice, yearsOfUse, sellerName, isSellerVerified, imgURL, sellerImgURL, isAdvertised } = product;
+    const { _id, title, publishedDate, location, resalePrice, originalPrice, yearsOfUse, sellerName, isSellerVerified, imgURL, sellerImgURL, isAdvertised, isReported } = product;
+
+    //handle mark the product as sold
+    const handleReportProduct = id => {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "Did you see any suspicious activity with this seller or product?",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, Report!'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                fetch(`${process.env.REACT_APP_API_URL}/reported-product/${id}`, {
+                    method: 'PATCH',
+                    headers: {
+                        'content-type': 'application/json',
+                        authorization: `bearer ${localStorage.getItem('computerBazar-token')}`
+                    },
+                    body: JSON.stringify({ status: true })
+                })
+                    .then(res => res.json())
+                    .then(data => {
+                        console.log(data);
+                        if (data.status) {
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'You have successfully reported this product. We will verify the product soon!',
+                                showConfirmButton: false,
+                                timer: 3000
+                            })
+                        } else {
+                            toast.error('Please login to report this product!')
+                        }
+
+                    })
+            }
+        })
+
+    }
     return (
         <div className="w-full overflow-hidden bg-base-100 rounded-lg shadow-lg">
             {
@@ -34,7 +77,13 @@ const ProductCard = ({ product, setSelectedProduct }) => {
             </div>
 
             <div className="px-6 py-4">
-                <h3 className='flex items-center gap-2 text-lg'><GoCalendar /> {publishedDate}</h3>
+
+                <div className='flex justify-between items-center'>
+                    <h3 className='flex items-center gap-2 text-lg'><GoCalendar /> {publishedDate}</h3>
+                    {
+                        isReported ? <button className='btn btn-outline btn-xs flex items-center gap-2 tooltip' data-tip="The product is already reported!" disabled><MdCheck /> Reported</button> : <button onClick={() => handleReportProduct(_id)} className='btn btn-outline btn-xs flex items-center gap-2 '><MdReportGmailerrorred /> Report</button>
+                    }
+                </div>
                 <h1 className="text-2xl font-semibold">{title}</h1>
 
                 <p className="pt-2"><b>YEARS OF USE:</b> {yearsOfUse} YEAR(S)</p>

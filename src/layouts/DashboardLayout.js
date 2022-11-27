@@ -81,9 +81,9 @@ const DashboardLayout = () => {
                                             </NavLink>
                                         </li>
                                         <li className="rounded-sm">
-                                            <NavLink to='/dashboard/reported-items' className={({ isActive }) => isActive ? activeMenu : inActive} >
+                                            <NavLink to='/dashboard/reported-products' className={({ isActive }) => isActive ? activeMenu : inActive} >
                                                 <BsPerson className='text-2xl' />
-                                                <span className='hidden sm:block'>Reported Items</span>
+                                                <span className='hidden sm:block'>Reported Products</span>
                                             </NavLink>
                                         </li>
                                     </>

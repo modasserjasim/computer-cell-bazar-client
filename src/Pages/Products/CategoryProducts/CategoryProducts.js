@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
+import Loading from '../../../components/Spinners/Loading';
 import BookingModal from '../BookingModal/BookingModal';
 import ProductCard from '../ProductCard/ProductCard';
 
@@ -7,6 +8,9 @@ const CategoryProducts = () => {
     const { categoryProducts } = useLoaderData();
     const [selectedProduct, setSelectedProduct] = useState(null);
 
+    if (categoryProducts?.length === 0) {
+        return <Loading></Loading>
+    }
     return (
         <div className='bg-base-200 py-20 px-4'>
             <div className='max-w-7xl mx-auto'>
