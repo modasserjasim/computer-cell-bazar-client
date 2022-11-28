@@ -14,7 +14,7 @@ const Dashboard = () => {
                             <div className="flex-shrink pl-1 pr-4"><i className="fa fa-wallet fa-2x fa-fw fa-inverse"></i></div>
                             <div className="flex-1 text-right">
                                 <h5 className="text-white">Total Revenue</h5>
-                                <h3 className="text-white text-3xl">3249&euro;<span className="text-green-400"><i className="fas fa-caret-down"></i></span></h3>
+                                <h3 className="text-white text-3xl">৳332249<span className="text-green-400"><i className="fas fa-caret-down"></i></span></h3>
                             </div>
                         </div>
                     </div>
@@ -24,8 +24,8 @@ const Dashboard = () => {
                         <div className="flex flex-row items-center">
                             <div className="flex-shrink pl-1 pr-4"><i className="fas fa-users fa-2x fa-fw fa-inverse"></i></div>
                             <div className="flex-1 text-right">
-                                <h5 className="text-white">Total Users</h5>
-                                <h3 className="text-white text-3xl">13 <span className="text-blue-400"><i className="fas fa-caret-up"></i></span></h3>
+                                <h5 className="text-white">Total Customers</h5>
+                                <h3 className="text-white text-3xl">25 <span className="text-blue-400"><i className="fas fa-caret-up"></i></span></h3>
                             </div>
                         </div>
                     </div>
@@ -35,7 +35,7 @@ const Dashboard = () => {
                         <div className="flex flex-row items-center">
                             <div className="flex-shrink pl-1 pr-4"><i className="fas fa-user-plus fa-2x fa-fw fa-inverse"></i></div>
                             <div className="flex-1 text-right pr-1">
-                                <h5 className="text-white">New Users</h5>
+                                <h5 className="text-white">New Customers</h5>
                                 <h3 className="text-white text-3xl">2 <span className="text-orange-400"><i className="fas fa-caret-up"></i></span></h3>
                             </div>
                         </div>
