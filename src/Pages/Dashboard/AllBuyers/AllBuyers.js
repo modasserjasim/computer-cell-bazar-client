@@ -13,7 +13,6 @@ const AllBuyers = () => {
             return data.allBuyers;
         }
     });
-    console.log(allBuyers);
 
     const handleBuyerDelete = buyer => {
         Swal.fire({

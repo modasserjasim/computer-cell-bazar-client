@@ -15,7 +15,6 @@ const AllSellers = () => {
             return data.allSellers;
         }
     });
-    console.log(allSellers);
 
     const handleVerifySeller = id => {
         fetch(`${process.env.REACT_APP_API_URL}/seller/${id}`, {

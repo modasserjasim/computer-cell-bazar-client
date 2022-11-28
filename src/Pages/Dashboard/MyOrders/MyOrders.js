@@ -19,7 +19,6 @@ const MyOrders = () => {
             return data.myOrders;
         }
     })
-    console.log(myOrders);
 
     if (isLoading) {
         return <Loading></Loading>;

@@ -17,7 +17,6 @@ const ReportedProducts = () => {
             return data.reportedProducts;
         }
     });
-    console.log(reportedProducts);
 
     const handleProductDelete = product => {
         Swal.fire({

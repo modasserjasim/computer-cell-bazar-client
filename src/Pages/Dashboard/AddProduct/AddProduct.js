@@ -6,14 +6,16 @@ import { toast } from 'react-toastify';
 import Loading from '../../../components/Spinners/Loading';
 import Spinner from '../../../components/Spinners/Spinner';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
+import useSeller from '../../../hooks/useSeller';
 
 const AddProduct = () => {
-    const { register, formState: { errors }, handleSubmit } = useForm();
     const { user } = useContext(AuthContext);
+    // const [sellerVerifyStatus] = useSeller(user?.email);
+    // console.log('seller status inside add product', sellerVerifyStatus);
+    const { register, formState: { errors }, handleSubmit } = useForm();
     const [loading, setLoading] = useState(false);
     const [condition, setCondition] = useState('Excellent');
     const [productCategory, setProductCategory] = useState('apple-laptops');
-    console.log(condition, productCategory);
     const navigate = useNavigate();
     const date = new Date().toLocaleString().split(',')[0];
     // console.log(date);
@@ -61,6 +63,7 @@ const AddProduct = () => {
                         category_id: productCategory,
                         sellerName: user.displayName,
                         sellerEmail: user.email,
+                        // isSellerVerified: sellerVerifyStatus,
                         sellerImgURL: user.photoURL,
                         imgURL: productImg,
                         description: data.description

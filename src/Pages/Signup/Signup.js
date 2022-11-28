@@ -59,7 +59,13 @@ const Signup = () => {
 
     }
     const saveUserToDB = (name, email, photoURL, role) => {
-        const user = { name, email, photoURL, role };
+        const user = {
+            name,
+            email,
+            photoURL,
+            role,
+            isSellerVerified: false
+        };
         fetch(`${process.env.REACT_APP_API_URL}/user`, {
             method: "POST",
             headers: {

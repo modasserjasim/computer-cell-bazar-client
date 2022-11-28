@@ -7,10 +7,14 @@ import Header from '../Pages/Shared/Header/Header';
 import { BsCalendar4Week, BsPlusCircleDotted, BsPerson } from "react-icons/bs";
 import { GiDoctorFace } from "react-icons/gi";
 import { GoSignOut } from "react-icons/go";
+import useSeller from '../hooks/useSeller';
+import useBuyer from '../hooks/useBuyer';
 
 const DashboardLayout = () => {
     const { user, logout } = useContext(AuthContext);
     const [isAdmin] = useAdmin(user?.email);
+    const [isSeller] = useSeller(user?.email);
+    const [isBuyer] = useBuyer(user?.email);
 
     const inActive = "flex justify-start items-center gap-2 text-white uppercase btn btn-sm btn-ghost";
     const activeMenu = "flex justify-start items-center gap-2 btn btn-sm glass text-white"
@@ -34,37 +38,57 @@ const DashboardLayout = () => {
                                     >
                                         {user?.displayName}
                                     </h2>
-                                    <p className="text-xs text-gray-200 text-center">Administrator</p>
+                                    <p className="text-xs text-gray-200 text-center">
+                                        {isAdmin && 'Administrator'}
+                                        {isSeller && 'Seller'}
+                                        {isBuyer && 'Buyer'}
+                                    </p>
                                 </div>
                             </div>
                         </div>
                         <div className="flex-1">
                             <ul className="pt-2 pb-4 space-y-3 text-sm flex justify-between items-center sm:block">
-                                <li className="rounded-sm">
-                                    <NavLink to='/dashboard/my-orders' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                        <BsCalendar4Week />
-                                        <span className='hidden sm:block'>My Orders</span>
-                                    </NavLink>
-                                </li>
+                                {
+                                    isBuyer && <>
+                                        <li className="rounded-sm">
+                                            <NavLink to='/dashboard/my-orders' className={({ isActive }) => isActive ? activeMenu : inActive} >
+                                                <BsCalendar4Week />
+                                                <span className='hidden sm:block'>My Orders</span>
+                                            </NavLink>
+                                        </li>
+                                        <li className="rounded-sm">
+                                            <NavLink to='/dashboard/wishlist' className={({ isActive }) => isActive ? activeMenu : inActive} >
+                                                <BsCalendar4Week />
+                                                <span className='hidden sm:block'>My Wishlist</span>
+                                            </NavLink>
+                                        </li>
+                                    </>
+                                }
+
                                 {/* seller options  */}
-                                <li className="rounded-sm">
-                                    <NavLink to='/dashboard/add-product' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                        <BsCalendar4Week />
-                                        <span className='hidden sm:block'>Add A Product</span>
-                                    </NavLink>
-                                </li>
-                                <li className="rounded-sm">
-                                    <NavLink to='/dashboard/my-products' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                        <BsCalendar4Week />
-                                        <span className='hidden sm:block'>My Products</span>
-                                    </NavLink>
-                                </li>
-                                <li className="rounded-sm">
-                                    <NavLink to='/dashboard/my-buyers' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                        <BsCalendar4Week />
-                                        <span className='hidden sm:block'>My Buyers</span>
-                                    </NavLink>
-                                </li>
+                                {
+                                    isSeller && <>
+                                        <li className="rounded-sm">
+                                            <NavLink to='/dashboard/add-product' className={({ isActive }) => isActive ? activeMenu : inActive} >
+                                                <BsCalendar4Week />
+                                                <span className='hidden sm:block'>Add A Product</span>
+                                            </NavLink>
+                                        </li>
+                                        <li className="rounded-sm">
+                                            <NavLink to='/dashboard/my-products' className={({ isActive }) => isActive ? activeMenu : inActive} >
+                                                <BsCalendar4Week />
+                                                <span className='hidden sm:block'>My Products</span>
+                                            </NavLink>
+                                        </li>
+                                        <li className="rounded-sm">
+                                            <NavLink to='/dashboard/my-buyers' className={({ isActive }) => isActive ? activeMenu : inActive} >
+                                                <BsCalendar4Week />
+                                                <span className='hidden sm:block'>My Buyers</span>
+                                            </NavLink>
+                                        </li>
+                                    </>
+                                }
+
                                 {
                                     isAdmin && <>
 

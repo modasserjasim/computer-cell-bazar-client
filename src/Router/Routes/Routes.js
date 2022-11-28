@@ -10,6 +10,7 @@ import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
 import Payment from "../../Pages/Dashboard/Payment/Payment";
 import ReportedProducts from "../../Pages/Dashboard/ReportedProducts/ReportedProducts";
+import WishList from "../../Pages/Dashboard/WishList/WishList";
 import ErrorPage from "../../Pages/ErrorPage/ErrorPage";
 import Home from "../../Pages/Homes/Home/Home";
 import Login from "../../Pages/Login/Login";
@@ -80,6 +81,10 @@ export const router = createBrowserRouter([
             {
                 path: '/dashboard/my-orders',
                 element: <MyOrders></MyOrders>
+            },
+            {
+                path: '/dashboard/wishlist',
+                element: <WishList></WishList>
             },
             {
                 path: '/dashboard/payment/:id',
