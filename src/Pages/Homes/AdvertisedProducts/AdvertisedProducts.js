@@ -1,20 +1,38 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import Loading from '../../../components/Spinners/Loading';
 import BookingModal from '../../Products/BookingModal/BookingModal';
 import ProductCard from '../../Products/ProductCard/ProductCard';
+import axios from 'axios'
 
 const AdvertisedProducts = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const { data: adsProducts = [], isLoading } = useQuery({
-        queryKey: ['advertised-products'],
-        queryFn: async () => {
-            const res = await fetch(`${process.env.REACT_APP_API_URL}/advertised-products`);
-            const data = await res.json();
-            return data.adsProducts
-        }
-    })
-    if (isLoading) {
+    const [adsProducts, setAdsProducts] = useState([]);
+    // const { data: adsProducts = [], isLoading } = useQuery({
+    //     queryKey: ['advertised-products'],
+    //     queryFn: async () => {
+    //         const res = await fetch(`${process.env.REACT_APP_API_URL}/advertised-products`, {
+    //             headers: {
+    //                 authorization: `bearer ${localStorage.getItem('computerBazar-token')}`
+    //             }
+    //         });
+    //         const data = await res.json();
+    //         return data.adsProducts
+    //     }
+    // })
+    useEffect(() => {
+        axios.get(`${process.env.REACT_APP_API_URL}/advertised-products`, {
+            headers: {
+                authorization: `bearer ${localStorage.getItem('computerBazar-token')}`
+            }
+        })
+            .then(data => {
+                const adsData = data.data.adsProducts;
+                setAdsProducts(adsData);
+                console.log('axios', adsProducts)
+            })
+    }, [])
+    if (adsProducts.length === 0) {
         return <Loading></Loading>;
     }
     return (
