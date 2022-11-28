@@ -5,6 +5,7 @@ import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'
+import { updateProductSaleStatus } from '../../../api/updateProductSaleStatus';
 
 
 const MyProducts = () => {
@@ -25,23 +26,30 @@ const MyProducts = () => {
 
     //handle mark the product as sold
     const handleSoldStatus = id => {
-        fetch(`${process.env.REACT_APP_API_URL}/my-product/${id}`, {
-            method: 'PATCH',
-            headers: {
-                'content-type': 'application/json',
-                authorization: `bearer ${localStorage.getItem('computerBazar-token')}`
-            },
-            body: JSON.stringify({ status: true })
-        })
-            .then(res => res.json())
+        updateProductSaleStatus(id)
             .then(data => {
-                // console.log(data);
                 if (data.status) {
                     refetch();
                     toast.success(data.message);
                 }
-
             })
+        // fetch(`${process.env.REACT_APP_API_URL}/my-product/${id}`, {
+        //     method: 'PATCH',
+        //     headers: {
+        //         'content-type': 'application/json',
+        //         authorization: `bearer ${localStorage.getItem('computerBazar-token')}`
+        //     },
+        //     body: JSON.stringify({ status: true })
+        // })
+        //     .then(res => res.json())
+        //     .then(data => {
+        //         // console.log(data);
+        //         if (data.status) {
+        //             refetch();
+        //             toast.success(data.message);
+        //         }
+
+        //     })
     }
     //handle mark the product as available again
     const handleAvailableStatus = id => {

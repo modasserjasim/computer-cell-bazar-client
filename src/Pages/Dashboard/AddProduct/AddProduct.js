@@ -107,14 +107,17 @@ const AddProduct = () => {
                 </div>
                 <div className='md:flex md:items-center md:gap-3'>
                     <div className="relative mt-4 w-full">
-                        <input {...register("sellingPrice", { required: "Product Selling Price is required" })} name='sellingPrice' type="number" id="floating_outlined_sellingPrice" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                        <input {...register("sellingPrice", { required: "Product Selling Price is required", min: 1, max: 999999, maxLength: { value: 6, message: "The amount should be less than 999999" } })} name='sellingPrice' type="number" id="floating_outlined_sellingPrice" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
                         <label htmlFor="floating_outlined_sellingPrice" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Product Price</label>
                         <div>
                             {errors.sellingPrice && <p role="alert" className='text-red-700 text-xs'>{errors.sellingPrice?.message}</p>}
                         </div>
                     </div>
                     <div className="relative mt-4 w-full">
-                        <input {...register("originalPrice", { required: "Product sellingPrice is required" })} name='originalPrice' type="number" id="floating_outlined_originalPrice" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
+                        <input {...register("originalPrice", {
+                            required: "Product sellingPrice is required", min: 1, max: 999999,
+                            maxLength: { value: 6, message: "The amount should be less than 999999" }
+                        })} name='originalPrice' type="number" id="floating_outlined_originalPrice" className="block px-2.5 pb-2.5 pt-4 w-full text-sm text-gray-900 bg-transparent rounded-lg border border-gray-300 appearance-none focus:outline-none focus:ring-0 focus:border-primary peer" placeholder=" " required />
                         <label htmlFor="floating_outlined_originalPrice" className="absolute text-md text-gray-500  duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white  px-2 peer-focus:px-2 peer-focus:text-gray-900 peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 left-1">Original Product Price</label>
                         <div>
                             {errors.originalPrice && <p role="alert" className='text-red-700 text-xs'>{errors.originalPrice?.message}</p>}

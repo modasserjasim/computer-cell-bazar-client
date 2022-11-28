@@ -79,7 +79,7 @@ const ProductCard = ({ product, setSelectedProduct }) => {
                 <div className='flex justify-between items-center'>
                     <h3 className='flex items-center gap-2 text-lg'><GoCalendar /> {publishedDate}</h3>
                     {
-                        isReported ? <button className='btn btn-outline btn-xs flex items-center gap-2 tooltip' data-tip="The product is already reported!" disabled><MdCheck /> Reported</button> : <button onClick={() => handleReportProduct(_id)} className='btn btn-outline btn-xs flex items-center gap-2 '><MdReportGmailerrorred /> Report</button>
+                        isReported ? <button className='btn btn-outline btn-xs flex items-center gap-2 disabled tooltip' data-tip="The product is already reported!" ><MdCheck /> Reported</button> : <button onClick={() => handleReportProduct(_id)} className='btn btn-outline btn-xs flex items-center gap-2 '><MdReportGmailerrorred /> Report</button>
                     }
                 </div>
                 <h1 className="text-2xl font-semibold">{title}</h1>

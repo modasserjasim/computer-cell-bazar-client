@@ -56,7 +56,7 @@ const MyOrders = () => {
                                     }
                                     {
                                         order.price && order.paid && <button
-                                            className='btn btn-primary btn-sm disabled'>PAID</button>
+                                            className='btn btn-primary btn-sm bg-green-700 border-0 text-white disabled'>PAID</button>
                                     }
                                 </td>
                             </tr>)
