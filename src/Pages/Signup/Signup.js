@@ -40,12 +40,13 @@ const Signup = () => {
                     createUser(data.email, data.password)
                         .then(result => {
                             const user = result.user;
+                            setLoading(false);
                             toast.success(`You have successfully created your account, ${data.name}`);
                             //update profile
                             updateUserProfile(data.name, imgData.data.display_url)
                                 .then(() => {
                                     saveUserToDB(user.displayName, user.email, user.photoURL, userRole)
-
+                                    setLoading(false);
                                 })
                                 .catch(err => toast.error(err));
 

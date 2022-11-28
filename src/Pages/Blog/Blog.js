@@ -56,9 +56,6 @@ const Blog = () => {
                     <div className="text-md mt-4">
                         <p className='text-md sm:text-md mt-1  font-medium'>The Prototypal Inheritance is a feature in javascript used to add methods and properties in objects. It is a method by which an object can inherit the properties and methods of another object. </p>
                         <p className='text-md  mt-3'>Traditionally, in order to get and set the <strong>[[Prototype]] </strong> of an object, we use <strong>Object.getPrototypeOf</strong> and <strong>Object.setPrototypeOf.</strong> Nowadays, in modern language, it is being set using <strong>__proto__</strong>.</p>
-                        <div className='flex justify-center my-4'>
-                            {/* <img src={prototype} alt="" /> */}
-                        </div>
                         <p className='font-bold text-xl mt-4'>Syntax:<span className="ai-anchor"></span></p>
                         <div className="my-3 ml-8">
                             <span className='py-2 px-3 bg-gray-200 text-md rounded  font-bold font-specially'>ChildObject.__proto__ = ParentObject</span>
@@ -80,9 +77,7 @@ const Blog = () => {
                     <div className="text-md mt-4">
                         <p className='text-md sm:text-md mt-1  font-medium'><strong>Unit Testing</strong> is a type of software testing where individual units or components of a software are tested. The purpose is to validate that each unit of the software code performs as expected. </p>
                         <p className='text-md  mt-3'>Unit Testing is done during the development (coding phase) of an application by the developers. Unit Tests isolate a section of code and verify its correctness. In SDLC, STLC, V Model, Unit testing is first level of testing done before integration testing.  </p>
-                        <div className='flex justify-center my-4'>
-                            {/* <img src={unitTest} alt="" /> */}
-                        </div>
+
                         <p className='font-bold text-xl mt-4'>Heres why should we write unit test:-</p>
                         <div className='mt-3'>
                             <p className='text-md  font-medium'>To justify any effort in business, there must be a positive impact on the bottom line. Here are a few benefits to writing unit tests:</p>

@@ -7,6 +7,8 @@ import { VscSignOut } from "react-icons/vsc";
 import { Link, NavLink } from 'react-router-dom';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 import { themeChange } from 'theme-change';
+import { MdOutlineDashboardCustomize } from "react-icons/md";
+
 
 const Header = () => {
     const { user, logout } = useContext(AuthContext);
@@ -59,6 +61,7 @@ const Header = () => {
                                             <div className='pt-2 mt-2 border-t border-base-300'>
                                                 <Link to='/user-profile' className='text-md flex items-center gap-1 py-2 hover:text-primary'><BiUser className='text-2xl' /> View Profile</Link>
                                                 <Link to='/edit-profile' className='text-md flex items-center gap-1 py-2 hover:text-primary'><BiEdit className='text-2xl' /> Edit Profile</Link>
+                                                <Link to='/dashboard' className='text-md flex items-center gap-1 py-2 hover:text-primary'><MdOutlineDashboardCustomize className='text-2xl' /> Dashboard</Link>
                                                 <Link onClick={logout} className='text-md flex items-center gap-1 py-2 hover:text-primary'><VscSignOut className='text-2xl' /> Logout</Link>
                                             </div>
                                         </div>
@@ -118,6 +121,7 @@ const Header = () => {
                                             <div className='pt-2 mt-2 border-t border-base-300'>
                                                 <Link to='/user-profile' className='text-md flex items-center gap-1 py-2 hover:text-primary'><BiUser className='text-2xl' /> View Profile</Link>
                                                 <Link to='/edit-profile' className='text-md flex items-center gap-1 py-2 hover:text-primary'><BiEdit className='text-2xl' /> Edit Profile</Link>
+                                                <Link to='/dashboard' className='text-md flex items-center gap-1 py-2 hover:text-primary'><MdOutlineDashboardCustomize className='text-2xl' /> Dashboard</Link>
                                                 <Link onClick={logout} className='text-md flex items-center gap-1 py-2 hover:text-primary'><VscSignOut className='text-2xl' /> Logout</Link>
                                             </div>
                                         </div>

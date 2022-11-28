@@ -5,6 +5,7 @@ import Blog from "../../Pages/Blog/Blog";
 import AddProduct from "../../Pages/Dashboard/AddProduct/AddProduct";
 import AllBuyers from "../../Pages/Dashboard/AllBuyers/AllBuyers";
 import AllSellers from "../../Pages/Dashboard/AllSellers/AllSellers";
+import Dashboard from "../../Pages/Dashboard/Dashboard/Dashboard";
 import MyBuyers from "../../Pages/Dashboard/MyBuyers/MyBuyers";
 import MyOrders from "../../Pages/Dashboard/MyOrders/MyOrders";
 import MyProducts from "../../Pages/Dashboard/MyProducts/MyProducts";
@@ -16,7 +17,10 @@ import Home from "../../Pages/Homes/Home/Home";
 import Login from "../../Pages/Login/Login";
 import CategoryProducts from "../../Pages/Products/CategoryProducts/CategoryProducts";
 import Signup from "../../Pages/Signup/Signup";
+import AdminRoute from "../AdminRoute/AdminRoute";
+import BuyerRoute from "../BuyerRoute/BuyerRoute";
 import PrivateRoute from "../PrivateRoute/PrivateRoute";
+import SellerRoute from "../SellerRoute/SellerRoute";
 
 
 export const router = createBrowserRouter([
@@ -55,40 +59,44 @@ export const router = createBrowserRouter([
         element: <PrivateRoute><DashboardLayout></DashboardLayout></PrivateRoute>,
         children: [
             {
+                path: '/dashboard',
+                element: <Dashboard></Dashboard>
+            },
+            {
                 path: '/dashboard/add-product',
-                element: <AddProduct></AddProduct>
+                element: <SellerRoute><AddProduct></AddProduct></SellerRoute>
             },
             {
                 path: '/dashboard/my-products',
-                element: <MyProducts></MyProducts>
+                element: <SellerRoute><MyProducts></MyProducts></SellerRoute>
             },
             {
                 path: '/dashboard/my-buyers',
-                element: <MyBuyers></MyBuyers>
+                element: <SellerRoute><MyBuyers></MyBuyers></SellerRoute>
             },
             {
                 path: '/dashboard/all-sellers',
-                element: <AllSellers></AllSellers>
+                element: <AdminRoute><AllSellers></AllSellers></AdminRoute>
             },
             {
                 path: '/dashboard/all-buyers',
-                element: <AllBuyers></AllBuyers>
+                element: <AdminRoute><AllBuyers></AllBuyers></AdminRoute>
             },
             {
                 path: '/dashboard/reported-products',
-                element: <ReportedProducts></ReportedProducts>
+                element: <AdminRoute><ReportedProducts></ReportedProducts></AdminRoute>
             },
             {
                 path: '/dashboard/my-orders',
-                element: <MyOrders></MyOrders>
+                element: <BuyerRoute><MyOrders></MyOrders></BuyerRoute>
             },
             {
                 path: '/dashboard/wishlist',
-                element: <WishList></WishList>
+                element: <BuyerRoute><WishList></WishList></BuyerRoute>
             },
             {
                 path: '/dashboard/payment/:id',
-                element: <Payment></Payment>,
+                element: <BuyerRoute><Payment></Payment></BuyerRoute>,
                 loader: ({ params }) => fetch(`${process.env.REACT_APP_API_URL}/order/${params.id}`)
             },
         ]

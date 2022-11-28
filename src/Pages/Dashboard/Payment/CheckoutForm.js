@@ -125,8 +125,8 @@ const CheckoutForm = ({ order }) => {
                     },
                 }}
             />
-            <button className='btn-sm btn-primary mt-4 w-full text-lg text-white' type="submit" disabled={!stripe || !clientSecret || processing}>
-                Pay ${price}
+            <button className='btn-sm btn-primary rounded-sm mt-4 w-full text-lg text-white' type="submit" disabled={!stripe || !clientSecret || processing}>
+                Pay ৳{price}
             </button>
             {
                 cardError && <p className='text-red-700 text-center'>{cardError}</p>

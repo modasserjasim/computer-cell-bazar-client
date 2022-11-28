@@ -4,9 +4,10 @@ import { AuthContext } from '../context/AuthProvider/AuthProvider';
 import useAdmin from '../hooks/useAdmin';
 import Footer from '../Pages/Shared/Footer/Footer';
 import Header from '../Pages/Shared/Header/Header';
-import { BsCalendar4Week, BsPlusCircleDotted, BsPerson } from "react-icons/bs";
-import { GiDoctorFace } from "react-icons/gi";
 import { GoSignOut } from "react-icons/go";
+import { BsCartCheck, BsBookmarkCheck } from "react-icons/bs";
+import { RiProductHuntLine, RiFolderAddLine, RiUser2Fill, RiUser3Line } from "react-icons/ri";
+import { MdReportGmailerrorred } from "react-icons/md";
 import useSeller from '../hooks/useSeller';
 import useBuyer from '../hooks/useBuyer';
 
@@ -23,7 +24,7 @@ const DashboardLayout = () => {
         <div>
             <Header></Header>
             <div className="sm:flex border-t border-base-200">
-                <div className="flex flex-col md:min-h-screen p-3 bg-gradient-to-r from-primary to-secondary sm:w-60 md:w-80">
+                <div className="flex flex-col md:min-h-screen p-3 bg-gradient-to-r from-primary to-secondary sm:w-72 md:w-80">
                     <div className="space-y-3 md:sticky md:top-24">
                         <div className="hidden sm:block">
                             <div id="profile" className="space-y-3">
@@ -52,13 +53,13 @@ const DashboardLayout = () => {
                                     isBuyer && <>
                                         <li className="rounded-sm">
                                             <NavLink to='/dashboard/my-orders' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                                <BsCalendar4Week />
+                                                <BsCartCheck className='text-2xl' />
                                                 <span className='hidden sm:block'>My Orders</span>
                                             </NavLink>
                                         </li>
                                         <li className="rounded-sm">
                                             <NavLink to='/dashboard/wishlist' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                                <BsCalendar4Week />
+                                                <BsBookmarkCheck className='text-2xl' />
                                                 <span className='hidden sm:block'>My Wishlist</span>
                                             </NavLink>
                                         </li>
@@ -70,19 +71,19 @@ const DashboardLayout = () => {
                                     isSeller && <>
                                         <li className="rounded-sm">
                                             <NavLink to='/dashboard/add-product' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                                <BsCalendar4Week />
+                                                <RiFolderAddLine className='text-2xl' />
                                                 <span className='hidden sm:block'>Add A Product</span>
                                             </NavLink>
                                         </li>
                                         <li className="rounded-sm">
                                             <NavLink to='/dashboard/my-products' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                                <BsCalendar4Week />
+                                                <RiProductHuntLine className='text-2xl' />
                                                 <span className='hidden sm:block'>My Products</span>
                                             </NavLink>
                                         </li>
                                         <li className="rounded-sm">
                                             <NavLink to='/dashboard/my-buyers' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                                <BsCalendar4Week />
+                                                <RiUser2Fill className='text-2xl' />
                                                 <span className='hidden sm:block'>My Buyers</span>
                                             </NavLink>
                                         </li>
@@ -94,19 +95,19 @@ const DashboardLayout = () => {
 
                                         <li className="rounded-sm">
                                             <NavLink to='/dashboard/all-sellers' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                                <BsPlusCircleDotted className='text-lg' />
+                                                <RiUser3Line className='text-2xl' />
                                                 <span className='hidden sm:block'>All Sellers</span>
                                             </NavLink>
                                         </li>
                                         <li className="rounded-sm">
                                             <NavLink to='/dashboard/all-buyers' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                                <GiDoctorFace className='text-xl' />
+                                                <RiUser2Fill className='text-2xl' />
                                                 <span className='hidden sm:block'>All Buyers</span>
                                             </NavLink>
                                         </li>
                                         <li className="rounded-sm">
                                             <NavLink to='/dashboard/reported-products' className={({ isActive }) => isActive ? activeMenu : inActive} >
-                                                <BsPerson className='text-2xl' />
+                                                <MdReportGmailerrorred className='text-2xl' />
                                                 <span className='hidden sm:block'>Reported Products</span>
                                             </NavLink>
                                         </li>

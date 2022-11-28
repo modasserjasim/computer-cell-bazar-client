@@ -79,7 +79,7 @@ const ProductCard = ({ product, setSelectedProduct }) => {
                 <div className='flex justify-between items-center'>
                     <h3 className='flex items-center gap-2 text-lg'><GoCalendar /> {publishedDate}</h3>
                     {
-                        isReported ? <button className='btn btn-outline btn-xs flex items-center gap-2 disabled tooltip' data-tip="The product is already reported!" ><MdCheck /> Reported</button> : <button onClick={() => handleReportProduct(_id)} className='btn btn-outline btn-xs flex items-center gap-2 '><MdReportGmailerrorred /> Report</button>
+                        isReported ? <button className='btn btn-outline btn-xs flex items-center gap-2 disabled tooltip' data-tip="The product is already reported!" ><MdCheck /> Reported</button> : <button onClick={() => handleReportProduct(_id)} className='btn btn-outline btn-xs text-xs flex items-center gap-2 tooltip' data-tip="Report to Admin"><MdReportGmailerrorred /> Report</button>
                     }
                 </div>
                 <h1 className="text-2xl font-semibold">{title}</h1>
@@ -88,7 +88,7 @@ const ProductCard = ({ product, setSelectedProduct }) => {
                 <p className="py-1"><b>ORIGINAL PRICE:</b> ৳{originalPrice}</p>
 
                 <div className='flex justify-between items-center'>
-                    <div className="flex items-center mt-4 text-2xl">
+                    <div className="flex items-center mt-4 text-md md:text-2xl font-bold">
                         <IoPricetagsOutline />
                         <h1 className="px-2 ">PRICE: ৳{resalePrice}</h1>
                     </div>

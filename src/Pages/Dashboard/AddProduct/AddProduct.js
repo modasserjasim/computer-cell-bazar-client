@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import React, { useContext, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { useForm } from 'react-hook-form';
 import { useNavigate } from 'react-router-dom';
 import { toast } from 'react-toastify';
@@ -10,15 +10,14 @@ import useSeller from '../../../hooks/useSeller';
 
 const AddProduct = () => {
     const { user } = useContext(AuthContext);
-    // const [sellerVerifyStatus] = useSeller(user?.email);
-    // console.log('seller status inside add product', sellerVerifyStatus);
+    const [sellerVerifyStatus, setSellerVerifyStatus] = useState(null);
+    console.log('seller status inside add product', sellerVerifyStatus);
     const { register, formState: { errors }, handleSubmit } = useForm();
     const [loading, setLoading] = useState(false);
     const [condition, setCondition] = useState('Excellent');
     const [productCategory, setProductCategory] = useState('apple-laptops');
     const navigate = useNavigate();
     const date = new Date().toLocaleString().split(',')[0];
-    // console.log(date);
 
     // get product categories from db collection to assign the dropdown
     const { data: categories = [], isLoading } = useQuery({
@@ -30,6 +29,15 @@ const AddProduct = () => {
         }
 
     })
+
+    useEffect(() => {
+        fetch(`${process.env.REACT_APP_API_URL}/user/seller/${user?.email}`)
+            .then(res => res.json())
+            .then(data => {
+                console.log('inside add', data);
+                setSellerVerifyStatus(data.isSellerVerified);
+            })
+    }, [user?.email])
 
     const handleAddProduct = data => {
         setLoading(true);
@@ -63,7 +71,7 @@ const AddProduct = () => {
                         category_id: productCategory,
                         sellerName: user.displayName,
                         sellerEmail: user.email,
-                        // isSellerVerified: sellerVerifyStatus,
+                        isSellerVerified: sellerVerifyStatus,
                         sellerImgURL: user.photoURL,
                         imgURL: productImg,
                         description: data.description

@@ -18,7 +18,7 @@ const Payment = () => {
         <div>
             <h1 className='text-3xl mb-2'>Payment for {productName}</h1>
             <p className='text-xl'>Please pay <b>৳{price}</b> for your order.</p>
-            <div className='w-1/2 bg-gray-100 p-8 rounded-md my-7'>
+            <div className='md:w-1/2 bg-gray-100 p-8 rounded-md my-7'>
                 <Elements stripe={stripePromise}>
                     <CheckoutForm order={order} />
                 </Elements>
