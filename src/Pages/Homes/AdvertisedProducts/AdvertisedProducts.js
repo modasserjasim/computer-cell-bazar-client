@@ -31,7 +31,7 @@ const AdvertisedProducts = () => {
                 setAdsProducts(adsData);
                 console.log('axios', adsProducts)
             })
-    }, [])
+    }, [adsProducts])
     if (adsProducts.length === 0) {
         return <Loading></Loading>;
     }
