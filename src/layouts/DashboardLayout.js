@@ -41,7 +41,7 @@ const DashboardLayout = () => {
                         <div className="flex-1">
                             <ul className="pt-2 pb-4 space-y-3 text-sm flex justify-between items-center sm:block">
                                 <li className="rounded-sm">
-                                    <NavLink to='/dashboard' className={({ isActive }) => isActive ? activeMenu : inActive} >
+                                    <NavLink to='/dashboard/my-orders' className={({ isActive }) => isActive ? activeMenu : inActive} >
                                         <BsCalendar4Week />
                                         <span className='hidden sm:block'>My Orders</span>
                                     </NavLink>

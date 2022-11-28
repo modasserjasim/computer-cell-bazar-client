@@ -32,6 +32,8 @@ const AllSellers = () => {
                 if (data.status) {
                     refetch();
                     toast.success(data.message);
+                } else {
+                    toast.error(data.error)
                 }
 
             })
@@ -83,7 +85,7 @@ const AllSellers = () => {
                             <th></th>
                             <th>Name</th>
                             <th>email</th>
-                            <th>isSellerVerified</th>
+                            <th>Verify Seller</th>
                             <th>Action</th>
                         </tr>
                     </thead>

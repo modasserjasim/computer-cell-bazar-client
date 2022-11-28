@@ -1,5 +1,4 @@
-import React, { useContext } from 'react';
-import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
+import React from 'react';
 import { IoPricetagsOutline } from "react-icons/io5";
 import { GoVerified, GoLocation, GoCalendar } from "react-icons/go";
 import { MdReportGmailerrorred, MdCheck } from "react-icons/md";
@@ -7,7 +6,6 @@ import { toast } from 'react-toastify';
 import Swal from 'sweetalert2';
 
 const ProductCard = ({ product, setSelectedProduct }) => {
-    const { user } = useContext(AuthContext);
     const { _id, title, publishedDate, location, resalePrice, originalPrice, yearsOfUse, sellerName, isSellerVerified, imgURL, sellerImgURL, isAdvertised, isReported } = product;
 
     //handle mark the product as sold

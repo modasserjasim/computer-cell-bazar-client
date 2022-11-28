@@ -51,7 +51,7 @@ const Signup = () => {
 
                         })
                         .catch(err => {
-                            toast.success(err.code);
+                            toast.error('Sorry!', err.code);
                             setLoading(false);
                         })
                 }

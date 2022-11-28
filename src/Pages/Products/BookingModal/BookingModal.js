@@ -5,15 +5,16 @@ import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
 
 const BookingModal = ({ selectedProduct, setSelectedProduct }) => {
     const { user } = useContext(AuthContext);
-    const { _id, title, resalePrice } = selectedProduct;
+    const { _id, title, resalePrice, imgURL } = selectedProduct;
 
     const handleBooking = e => {
         e.preventDefault();
         const form = e.target;
 
         const bookingInfo = {
-            productName: title,
             productId: _id,
+            productName: title,
+            productImg: imgURL,
             price: resalePrice,
             buyerName: form.name.value,
             email: form.email.value,

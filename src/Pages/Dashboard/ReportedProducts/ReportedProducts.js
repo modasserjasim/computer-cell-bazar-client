@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import Swal from 'sweetalert2';
-import { deleteProduct } from '../../../api/deleteProduct';
 import Loading from '../../../components/Spinners/Loading';
 
 const ReportedProducts = () => {

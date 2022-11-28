@@ -2,9 +2,10 @@ import React from 'react';
 import Swal from 'sweetalert2';
 import { RiDeleteBin6Line } from "react-icons/ri";
 import { useQuery } from '@tanstack/react-query';
+import Loading from '../../../components/Spinners/Loading';
 
 const AllBuyers = () => {
-    const { data: allBuyers = [], refetch } = useQuery({
+    const { data: allBuyers = [], isLoading, refetch } = useQuery({
         queryKey: ['all-buyers'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_API_URL}/all-buyers`);
@@ -47,6 +48,9 @@ const AllBuyers = () => {
 
             }
         })
+    }
+    if (isLoading) {
+        return <Loading></Loading>;
     }
     return (
         <div>

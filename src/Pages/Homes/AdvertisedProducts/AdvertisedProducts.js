@@ -1,12 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
 import React, { useState } from 'react';
+import Loading from '../../../components/Spinners/Loading';
 import BookingModal from '../../Products/BookingModal/BookingModal';
 import ProductCard from '../../Products/ProductCard/ProductCard';
-import AdvertisedCard from './AdvertisedCard';
 
 const AdvertisedProducts = () => {
     const [selectedProduct, setSelectedProduct] = useState(null);
-    const { data: adsProducts = [] } = useQuery({
+    const { data: adsProducts = [], isLoading } = useQuery({
         queryKey: ['advertised-products'],
         queryFn: async () => {
             const res = await fetch(`${process.env.REACT_APP_API_URL}/advertised-products`);
@@ -14,6 +14,9 @@ const AdvertisedProducts = () => {
             return data.adsProducts
         }
     })
+    if (isLoading) {
+        return <Loading></Loading>;
+    }
     return (
         <div>
             {

@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import React, { useContext } from 'react';
 import Loading from '../../../components/Spinners/Loading';
 import { AuthContext } from '../../../context/AuthProvider/AuthProvider';
-import { RiEditBoxLine, RiDeleteBin6Line } from "react-icons/ri";
+import { RiDeleteBin6Line } from "react-icons/ri";
 import { toast } from 'react-toastify';
 import Swal from 'sweetalert2'
 
