@@ -21,17 +21,10 @@ const AdvertisedProducts = () => {
     //     }
     // })
     useEffect(() => {
-        axios.get(`${process.env.REACT_APP_API_URL}/advertised-products`, {
-            headers: {
-                authorization: `bearer ${localStorage.getItem('computerBazar-token')}`
-            }
-        })
-            .then(data => {
-                const adsData = data.data.adsProducts;
-                setAdsProducts(adsData);
-                console.log('axios', adsProducts)
-            })
-    }, [adsProducts])
+        axios.get(`${process.env.REACT_APP_API_URL}/advertised-products`)
+            .then(data => setAdsProducts(data.data.adsProducts))
+    }, [])
+
     if (adsProducts.length === 0) {
         return <Loading></Loading>;
     }

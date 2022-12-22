@@ -36,7 +36,7 @@ const Header = () => {
                         <div className="flex items-center md:hidden">
                             <label className="swap swap-rotate mr-2">
                                 <input type="checkbox" />
-                                <IoSunnyOutline data-set-theme="dark" data-act-class="ACTIVECLASS" className="swap-on fill-current text-2xl" />
+                                <IoSunnyOutline data-set-theme="coffee" data-act-class="ACTIVECLASS" className="swap-on fill-current text-2xl" />
                                 <IoMoonOutline data-set-theme="winter" data-act-class="ACTIVECLASS" className="swap-off fill-current text-2xl" />
                             </label>
 
